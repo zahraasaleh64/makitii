@@ -18,10 +18,23 @@ use Illuminate\Support\Facades\Route;
 */
 
 $serveFrontend = function () {
-    $indexFile = public_path('build/index.html');
+    $candidates = [
+        public_path('build/index.html'),
+        base_path('public/build/index.html'),
+        base_path('backend/public/build/index.html'),
+        __DIR__ . '/../public/build/index.html',
+    ];
+
+    $indexFile = null;
+    foreach ($candidates as $candidate) {
+        if (file_exists($candidate)) {
+            $indexFile = $candidate;
+            break;
+        }
+    }
 
     abort_unless(
-        file_exists($indexFile),
+        $indexFile !== null,
         404,
         "Frontend non compilé. Lancez `npm run build` dans le dossier frontend (voir README)."
     );
