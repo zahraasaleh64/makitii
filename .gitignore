@@ -20,7 +20,6 @@ vendor/
 dist/
 dist-ssr/
 backend/public/hot
-backend/public/storage
 backend/storage/*.key
 backend/storage/pail/
 backend/.phpunit.cache
