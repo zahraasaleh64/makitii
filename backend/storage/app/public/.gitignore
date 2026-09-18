@@ -1,2 +1,9 @@
+# Ignore uploads except seed and demo assets
 *
 !.gitignore
+!categories/
+!categories/**
+!products/
+!products/**
+!stores/
+!stores/**
