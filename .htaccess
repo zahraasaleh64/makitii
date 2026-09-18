@@ -1,9 +1,12 @@
 <IfModule mod_rewrite.c>
-    <IfModule mod_negotiation.c>
-        Options -MultiViews -Indexes
-    </IfModule>
-
+    Options -MultiViews -Indexes +FollowSymLinks
     RewriteEngine On
+
+    # Directly serve storage files from backend/storage/app/public without symlink dependency
+    RewriteRule ^storage/(.*)$ backend/storage/app/public/$1 [L,QSA]
+
+    # Directly serve build assets from backend/public/build
+    RewriteRule ^build/(.*)$ backend/public/build/$1 [L,QSA]
 
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
